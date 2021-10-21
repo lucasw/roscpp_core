@@ -64,7 +64,10 @@ namespace ros {
       throw std::runtime_error("Duration is out of 64-bit integer range");
     int64_t sec64 = static_cast<int64_t>(floor(d));
     if (sec64 < std::numeric_limits<int32_t>::min() || sec64 > std::numeric_limits<int32_t>::max())
+    {
+      std::cerr << "fromSec error " << d << " -> " << sec64 << "\n";
       throw std::runtime_error("Duration is out of dual 32-bit range");
+    }
     sec = static_cast<int32_t>(sec64);
     nsec = static_cast<int32_t>(boost::math::round((d - sec) * 1e9));
     int32_t rollover = nsec / 1000000000ul;

@@ -55,7 +55,11 @@ namespace ros {
       }
 
     if (sec_part < std::numeric_limits<int32_t>::min() || sec_part > std::numeric_limits<int32_t>::max())
+    {
+      std::cerr << "normalizeSecNSec error " << sec << " " << nsec << " -> "
+          << sec_part << " " << nsec_part << "\n";
       throw std::runtime_error("Duration is out of dual 32-bit range");
+    }
 
     sec = sec_part;
     nsec = nsec_part;
