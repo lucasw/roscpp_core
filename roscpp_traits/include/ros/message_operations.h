@@ -46,7 +46,7 @@ struct Printer
   }
 };
 
-// Specialize for std::string for correct quoting
+// Specialize for std::string for quoting with single quotes
 template <>
 struct Printer<std::string>
 {
@@ -54,14 +54,14 @@ struct Printer<std::string>
   static void stream(Stream &s, const std::string &indent, const std::string &value)
   {
     (void)indent;
-    s << '"';
+    s << '\'';
     for (const char ch : value) {
-      if (ch == '"')
-        s << "\\\""; // escape quotes
+      if (ch == '\'')
+        s << "''"; // escape single quote with another single quote
       else
         s << ch;
     }
-    s << '"';
+    s << '\'';
   }
 };
 
