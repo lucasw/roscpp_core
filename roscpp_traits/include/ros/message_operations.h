@@ -46,6 +46,25 @@ struct Printer
   }
 };
 
+// Specialize for std::string for correct quoting
+template <>
+struct Printer<std::string>
+{
+  template <typename Stream>
+  static void stream(Stream &s, const std::string &indent, const std::string &value)
+  {
+    (void)indent;
+    s << '"';
+    for (const char ch : value) {
+      if (ch == '"')
+        s << "\\\""; // escape quotes
+      else
+        s << ch;
+    }
+    s << '"';
+  }
+};
+
 // Explicitly specialize for uint8_t/int8_t because otherwise it thinks it's a char, and treats
 // the value as a character code
 template<>
