@@ -42,7 +42,7 @@ struct Printer
   static void stream(Stream& s, const std::string& indent, const M& value)
   {
     (void)indent;
-    s << value << "\n";
+    s << value;
   }
 };
 
@@ -55,7 +55,7 @@ struct Printer<int8_t>
   static void stream(Stream& s, const std::string& indent, int8_t value)
   {
     (void)indent;
-    s << static_cast<int32_t>(value) << "\n";
+    s << static_cast<int32_t>(value);
   }
 };
 
@@ -66,7 +66,7 @@ struct Printer<uint8_t>
   static void stream(Stream& s, const std::string& indent, uint8_t value)
   {
     (void)indent;
-    s << static_cast<uint32_t>(value) << "\n";
+    s << static_cast<uint32_t>(value);
   }
 };
 
